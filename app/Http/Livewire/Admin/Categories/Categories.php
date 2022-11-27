@@ -20,7 +20,7 @@ class Categories extends Component
         $categories = Category::latest();
 
         if($this->search !== null){
-            $categories = $categories->where('name', 'like', '%' . $this->search . '%');
+            $categories = $categories->where('value', 'like', '%' . $this->search . '%');
         }
         $categories = $categories->paginate($this->paginate);
 

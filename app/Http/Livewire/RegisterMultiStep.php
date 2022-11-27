@@ -62,7 +62,6 @@ class RegisterMultiStep extends Component
             $query->where('status', null)->whereEditable(1);
         })->where('name', '!=', 'phone' )->where('name', '!=', 'description' )->get();
 
-        dd($this->selects);
         $this->phones_mother = collect();
     }
 
@@ -91,11 +90,7 @@ class RegisterMultiStep extends Component
                 'health_mother' => 'required',
                 'sahm_mother' => 'required',
                 'skills_mother' => 'required',
-                'employment_status_mother' => 'required',
-                'type_employment_mother' => 'required',
-                'job_mother' => 'required',
-                'cause_unemployment_mother' => 'required',
-                // 'phones_mother.*' => 'nullable',
+                'phones_mother.*' => 'nullable',
                 'avatar_mother' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             ];
         }

@@ -114,7 +114,7 @@
 
                     </select>
                     @error($item->name.'_mother')
-                    <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
+                        <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
                     @enderror
                 </div>
             @endforeach

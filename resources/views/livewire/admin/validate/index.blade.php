@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card shadow-sm">
             <div class="card-header">
-                <h3 class="card-title">تمام ویژگی هاها</h3>
+                <h3 class="card-title">تمام اعتبارسنجی ها</h3>
 
                 <div class="card-toolbar">
 
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary" wire:click.prevent="new()"> ویژگی جدید </button>
+                                <button type="button" class="btn btn-primary" wire:click.prevent="new()"> اعتبارسنجی جدید </button>
                             </div>
                         </div>
                     </div>
@@ -42,30 +42,22 @@
                     <table class="table table-striped gy-7 gs-7">
                         <thead>
                             <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                                <th class="min-w-200px">نام </th>
-                                <th class="min-w-200px">وضعیت </th>
+                                <th class="min-w-200px"> عنوان </th>
+                                <th class="min-w-200px">مقدار </th>
                                 <th class="min-w-200px text-end"> عملیات </th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ( $attrs as $attr)
+                            @foreach ( $validations as $validation)
                             <tr>
-                                <td>{{ $attr->name }}</td>
+                                <td>{{ $validation->title }}</td>
 
-                                <td>
-                                    @if ( $attr->status === 0)
-                                        فرزندان
-                                    @elseif ( $attr->status == 1 )
-                                        والدین
-                                    @elseif ( $attr->status === null )
-                                        والدین , فرزندان
-                                    @endif
-                                </td>
+                                <td>{{ $validation->value }}</td>
 
                                 <td class="text-end">
 
-                                    <a href="" wire:click.prevent="edit('{{ $attr->id }}')">
+                                    <a href="" wire:click.prevent="edit('{{ $validation->id }}')">
                                         <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-10-09-043348/core/html/src/media/icons/duotune/general/gen055.svg-->
                                         <span class="svg-icon svg-icon-muted svg-icon-2hx">
                                             <svg width="10" height="10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +69,7 @@
                                         <!--end::Svg Icon-->
                                     </a>
 
-                                    <a href="" wire:click.prevent="destroy('{{ $attr->id }}')">
+                                    <a href="" wire:click.prevent="destroy('{{ $validation->id }}')">
                                         <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-10-09-043348/core/html/src/media/icons/duotune/general/gen027.svg-->
                                         <span class="svg-icon svg-icon-muted svg-icon-2hx">
                                             <svg width="10" height="10" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +90,7 @@
                 </div>
 
                 <ul class="pagination pagination-rounded justify-content-end my-2">
-                    {{ $attrs->appends( request()->query() )->links() }}
+                    {{ $validations->appends( request()->query() )->links() }}
                 </ul>
             </div>
         </div>

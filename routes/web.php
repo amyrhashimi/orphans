@@ -11,6 +11,9 @@ use App\Http\Livewire\Admin\Users\Children;
 use App\Http\Livewire\Admin\Users\Create;
 use App\Http\Livewire\Admin\Users\Edit;
 use App\Http\Livewire\Admin\Users\Users;
+use App\Http\Livewire\Admin\Validate\Create as ValidateCreate;
+use App\Http\Livewire\Admin\Validate\Edit as ValidateEdit;
+use App\Http\Livewire\Admin\Validate\Index;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\Login;
 use App\Http\Livewire\Register;
@@ -57,6 +60,10 @@ Route::prefix('admin')->middleware(['isLogin','isAdmin'])->group(function (){
     Route::get('/attributes', Attributes::class)->name('attributes');
     Route::get('/attributes/edit/{attribute}', AttributesEdit::class)->name('attributes.edit');
     Route::get('/attributes/create', AttributesCreate::class)->name('attributes.create');
+
+    Route::get('/validate', Index::class)->name('validate');
+    Route::get('/validate/edit/{validate}', ValidateEdit::class)->name('validate.edit');
+    Route::get('/validate/create', ValidateCreate::class)->name('validate.create');
 
 });
 
