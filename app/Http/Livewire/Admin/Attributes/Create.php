@@ -44,9 +44,14 @@ class Create extends Component
         $this->category->push( new Category() );
     }
 
+    public function remove($id) {
+        $this->category->forget( $id );
+    }
+
     public function save(){
         $this->validate();
 
+        // Save Attribute
         $attribute = Attribute::create([
             'name' => $this->title,
             'value' => $this->persian,
@@ -54,19 +59,18 @@ class Create extends Component
             'status' => $this->status
         ]);
 
+        // Save Validation Children
         if ($this->status == 0 OR $this->status == null ) {
-            foreach ($this->validate_children as $value) {
-                # code...
-            }
+            $attribute->validations()->attach($this->validate_children);
         }
 
+        // Save Validation Mother
         if ($this->status == 1 OR $this->status == null ) {
-            foreach ($this->validate_mother as $value) {
-                # code...
-            }
+            $attribute->validations()->attach($this->validate_mother);
         }
 
-        foreach ($this->category as $key => $value) {
+        // Save Category For Value Attribute
+        foreach ($this->category as $value) {
             $value += ['attribute_id' => $attribute->id ];
             Category::create($value);
         }

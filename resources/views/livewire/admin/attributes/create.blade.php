@@ -76,12 +76,12 @@
                 </div>
 
                 @if ( $status == 0 OR $status == null)
-                    <div class="row mb-6">
+                    <div class="row mb-6" wire:ignore>
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
                             <span>اعتبارسنجی فرزندان</span>
                         </label>
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <select class="form-select form-select-solid" multiple="multiple" wire:model="validate_children">
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option" data-allow-clear="true"  multiple="multiple" wire:model="validate_children">
                                 <option></option>
                                 @foreach ( \App\Models\Validation::all() as $validate)
                                     <option value="{{ $validate->id }}">{{ $validate->title }}</option>
@@ -96,12 +96,12 @@
                 @endif
 
                 @if ( $status == 1 OR $status == null)
-                    <div class="row mb-6">
+                    <div class="row mb-6" wire:ignore>
                         <label class="col-lg-4 col-form-label fw-bold fs-6">
                             <span>اعتبارسنجی والدین</span>
                         </label>
                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                            <select class="form-select form-select-solid" multiple="multiple" wire:model="validate_mother">
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Select an option" data-allow-clear="true"  multiple="multiple" wire:model="validate_mother">
                                 <option></option>
                                 @foreach ( \App\Models\Validation::all() as $validate)
                                     <option value="{{ $validate->id }}">{{ $validate->title }}</option>
@@ -122,8 +122,12 @@
                     @foreach ($category as $index => $value)
                         <div class="input-group mt-3">
                             <input type="text" class="form-control" wire:model="category.{{ $index }}.value" placeholder="مقدار را وارد کنید" aria-describedby="basic-addon2">
-                            <button class="btn btn-danger" type="button">X</button>
+                            <button class="btn btn-danger" type="button" wire:click="remove('{{ $index }}')">X</button>
                         </div>
+
+                        @error('category.' . $index . '.value')
+                            <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
+                        @enderror
                     @endforeach
                 </div>
                 @endif
