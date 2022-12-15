@@ -19,31 +19,11 @@ class RegisterMultiStep extends Component
     public $phone;
     public $code = false;
     public $number;
+
     // setup 2
-    public $name_mother;
-    public $family;
-    public $email_mother;
-    public $passport_code_mother;
-    public $unique_id_mother;
-    public $date_birth_mother;
-    public $status;
+    public User $user;
+    public $attributes_mother = [];
 
-    public $sahm_mother;
-    public $place_birth_mother;
-    public $status_mother;
-    public $literacy_rate_mother;
-    public $health_mother;
-    public $skills_mother;
-    public $employment_status_mother;
-    public $type_employment_mother;
-    public $job_mother;
-    public $cause_unemployment_mother;
-    public $description_mother;
-    public $avatar_mother;
-    public $inputs;
-    public $selects;
-
-    public $phones_mother;
     // setup 3
 
 
@@ -51,18 +31,28 @@ class RegisterMultiStep extends Component
 
 
     public $current_page = 3;
-    public $current_page_now = 2;
+    public $current_page_now = 1;
 
     public function mount() {
-        $this->inputs = Attribute::whereEditable(0)->where('status', 1)->orWhere(function($query) {
+        // $this->inputs = Attribute::whereEditable(0)->where('status', 1)->orWhere(function($query) {
+        //     $query->where('status', null)->whereEditable(0);
+        // })->where('name', '!=', 'phone' )->where('name', '!=', 'description' )->get();
+
+        // $this->selects = Attribute::whereEditable(1)->where('status', 1)->orWhere(function($query) {
+        //     $query->where('status', null)->whereEditable(1);
+        // })->where('name', '!=', 'phone' )->where('name', '!=', 'description' )->get();
+
+
+        $attributes_mother = Attribute::whereStatus(1)->orWhere(function($query) {
             $query->where('status', null)->whereEditable(0);
         })->where('name', '!=', 'phone' )->where('name', '!=', 'description' )->get();
 
-        $this->selects = Attribute::whereEditable(1)->where('status', 1)->orWhere(function($query) {
-            $query->where('status', null)->whereEditable(1);
-        })->where('name', '!=', 'phone' )->where('name', '!=', 'description' )->get();
+        foreach( $attributes_mother as $attribute ) $this->attributes_mother += [ $attribute->name.'_mother' => '' ];
 
-        $this->phones_mother = collect();
+
+        // $this->attributes_mother =
+
+        dd( $this->attributes_mother );
     }
 
     public function render()

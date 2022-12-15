@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('value');
             $table->boolean('editable')->default(0);
-            $table->boolean('status')->nullable(); // 1 for mother and 0 for children and null for all
+            $table->integer('status')->nullable(); // 1 for mother and 0 for children and null for all And 3 For No Body
 
             $table->timestamps();
             $table->softDeletes();

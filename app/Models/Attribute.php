@@ -29,4 +29,9 @@ class Attribute extends Model
     public function validations() {
         return $this->belongsToMany(Validation::class);
     }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
 }

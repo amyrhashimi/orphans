@@ -2,7 +2,6 @@
 
     @if ($current_page_now == 1)
         {{-- Setup 1 --}}
-        <!--begin::Input group-->
         <div class="row fv-row mb-7">
             <label class="form-label fw-bolder text-dark fs-6">شماره تلفن</label>
             <input class="form-control form-control-lg form-control-solid" type="text" autocomplete="off" wire:model="phone" />
@@ -10,10 +9,8 @@
                 <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
             @enderror
         </div>
-        <!--end::Input group-->
 
         @if ($code == true)
-            <!--begin::Input group-->
             <div class="row fv-row mb-7">
                 <label class="form-label fw-bolder text-dark fs-6">کد</label>
                 <input class="form-control form-control-lg form-control-solid" type="text" autocomplete="off" wire:model="number" />
@@ -21,10 +18,7 @@
                     <span class="text-danger mt-2">{{ session()->get('code_not_found') }}</span>
                 @endif
             </div>
-            <!--end::Input group-->
-
             <button type="button" class="btn btn-success" wire:click="next()" >شروع به ثبت نام</button>
-
         @else
             <button type="button" class="btn btn-success" wire:click="sendSms()" >دریافت کد</button>
         @endif
@@ -39,7 +33,7 @@
             <label class="form-label fw-bolder text-dark fs-6">نام مادر</label>
             <input class="form-control form-control-lg form-control-solid" type="text" wire:model.debounce.lazy="name_mother" autocomplete="off"/>
             @error('name_mother')
-            <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
+                <div class="fv-plugins-message-container invalid-feedback"><div data-field="first-name" data-validator="notEmpty">{{ $message }}</div></div>
             @enderror
         </div>
         <!--end::Col-->
